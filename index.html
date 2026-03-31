@@ -1,651 +1,245 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdallah EL ABIAD — Ingénieur IT & Data</title>
+<title>Abdallah EL ABIAD — Ingénieur IT &amp; Data</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #18181f;
-    --accent: #4f8ef7;
-    --accent2: #7c3aed;
-    --accent3: #06d6a0;
-    --text: #e8e8f0;
-    --muted: #6b6b80;
-    --border: #22222e;
+  [data-theme="dark"] {
+    --bg: #0a0a0f; --surface: #111118; --surface2: #18181f;
+    --accent: #4f8ef7; --accent2: #7c3aed; --accent3: #06d6a0;
+    --text: #e8e8f0; --muted: #6b6b80; --border: #22222e;
+    --nav-bg: rgba(10,10,15,0.85); --grid-color: #22222e;
+    --hero-desc: #a0a0b8;
+    --badge-bg: rgba(6,214,160,0.1); --badge-border: rgba(6,214,160,0.3);
+  }
+  [data-theme="light"] {
+    --bg: #f5f5fa; --surface: #ffffff; --surface2: #f0f0f8;
+    --accent: #2563eb; --accent2: #7c3aed; --accent3: #059669;
+    --text: #1a1a2e; --muted: #6b7280; --border: #e2e2ef;
+    --nav-bg: rgba(245,245,250,0.92); --grid-color: #e2e2ef;
+    --hero-desc: #4b5563;
+    --badge-bg: rgba(5,150,105,0.08); --badge-border: rgba(5,150,105,0.25);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    line-height: 1.7; overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
   }
 
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.35;
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: 0.35; pointer-events: none; z-index: 0;
   }
 
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem; background: var(--nav-bg);
+    backdrop-filter: blur(16px); border-bottom: 1px solid var(--border);
+    transition: background 0.3s, border-color 0.3s;
   }
-
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--accent); letter-spacing: -0.5px; }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; cursor: pointer; }
   .nav-links a:hover { color: var(--accent); }
 
-  section {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 6rem 2rem;
+  .theme-toggle {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 100px;
+    padding: 0.35rem 0.7rem; cursor: pointer; display: flex; align-items: center;
+    gap: 0.4rem; font-size: 0.85rem; transition: all 0.2s; color: var(--muted);
   }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 10rem;
-    padding-bottom: 4rem;
-  }
+  section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
 
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--accent3);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s ease forwards;
-  }
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 10rem; padding-bottom: 4rem; }
 
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    line-height: 1;
-    letter-spacing: -3px;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.35s ease forwards;
-  }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent3); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards; }
 
-  .hero-name span {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--badge-bg); border: 1px solid var(--badge-border);
+    border-radius: 100px; padding: 0.35rem 0.9rem; margin-bottom: 1.5rem;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--accent3); letter-spacing: 0.08em;
+    opacity: 0; animation: fadeUp 0.6s 0.3s ease forwards;
+    width: fit-content;
   }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent3); position: relative; flex-shrink: 0; }
+  .badge-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: var(--accent3); opacity: 0.3; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.8); opacity: 0; } }
 
-  .hero-subtitle {
-    font-family: 'DM Mono', monospace;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: var(--muted);
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.5s ease forwards;
-  }
+  .hero-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1; letter-spacing: -3px; margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 0.6s 0.45s ease forwards; }
+  .hero-name span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-  .hero-desc {
-    max-width: 580px;
-    font-size: 1.05rem;
-    color: #a0a0b8;
-    line-height: 1.8;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.65s ease forwards;
-    margin-bottom: 3rem;
-  }
+  .hero-subtitle { font-family: 'DM Mono', monospace; font-size: clamp(0.9rem, 2vw, 1.05rem); color: var(--muted); margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.6s 0.6s ease forwards; min-height: 1.6em; }
+  .typing-text { color: var(--accent); }
+  .typing-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent); margin-left: 2px; vertical-align: middle; animation: blink 0.75s infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.8s ease forwards;
-  }
+  .hero-desc { max-width: 580px; font-size: 1.05rem; color: var(--hero-desc); line-height: 1.8; opacity: 0; animation: fadeUp 0.6s 0.75s ease forwards; margin-bottom: 2.5rem; }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.8rem;
-    border-radius: 4px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.82rem;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-  }
+  .stats-band { display: flex; flex-wrap: wrap; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.6s 0.9s ease forwards; background: var(--surface); }
+  .stat-item { flex: 1; min-width: 130px; padding: 1.2rem 1rem; text-align: center; border-right: 1px solid var(--border); transition: background 0.2s; }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: var(--surface2); }
+  .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.8rem; line-height: 1; margin-bottom: 0.3rem; background: linear-gradient(135deg, var(--accent3), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; }
 
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 1.05s ease forwards; }
 
-  .btn-primary:hover {
-    background: #6b9ff8;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(79,142,247,0.35);
-  }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.05em; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #6b9ff8; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,142,247,0.35); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; animation: bounce 2s infinite; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(var(--accent), transparent); }
 
-  .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    animation: bounce 2s infinite;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(var(--accent), transparent);
-  }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent3);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2rem, 4vw, 3rem);
-    letter-spacing: -1.5px;
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
-
-  .divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    margin-bottom: 3rem;
-    border-radius: 2px;
-  }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent3); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -1.5px; margin-bottom: 3rem; line-height: 1.1; }
+  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); margin-bottom: 3rem; border-radius: 2px; }
 
   .exp-grid { display: grid; gap: 1.5rem; }
-
-  .exp-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .exp-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, var(--accent), var(--accent2));
-    border-radius: 4px 0 0 4px;
-  }
-
-  .exp-card:hover {
-    border-color: rgba(79,142,247,0.4);
-    transform: translateX(4px);
-  }
-
-  .exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .exp-company {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--accent);
-  }
-
-  .exp-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--muted);
-    background: var(--surface2);
-    padding: 0.25rem 0.75rem;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-  }
-
-  .exp-role {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #c0c0d8;
-    margin-bottom: 1.2rem;
-  }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .exp-bullets li {
-    font-size: 0.9rem;
-    color: #8888a0;
-    padding-left: 1.2rem;
-    position: relative;
-  }
-
-  .exp-bullets li::before {
-    content: '›';
-    position: absolute;
-    left: 0;
-    color: var(--accent3);
-    font-weight: 700;
-  }
-
-  .exp-bullets li strong { color: #c0c0d8; font-weight: 500; }
-
+  .exp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 2rem 2.5rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+  .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent), var(--accent2)); border-radius: 4px 0 0 4px; }
+  .exp-card:hover { border-color: rgba(79,142,247,0.4); transform: translateX(4px); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .exp-company { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--accent); }
+  .exp-period { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); background: var(--surface2); padding: 0.25rem 0.75rem; border-radius: 100px; border: 1px solid var(--border); }
+  .exp-role { font-size: 0.9rem; font-weight: 500; color: var(--text); opacity: 0.8; margin-bottom: 1.2rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .exp-bullets li { font-size: 0.9rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
+  .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--accent3); font-weight: 700; }
+  .exp-bullets li strong { color: var(--text); font-weight: 500; }
   .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; }
 
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    background: rgba(79,142,247,0.08);
-    border: 1px solid rgba(79,142,247,0.2);
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .skill-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: border-color 0.3s, transform 0.2s;
-  }
-
-  .skill-card:hover {
-    border-color: rgba(79,142,247,0.3);
-    transform: translateY(-3px);
-  }
-
-  .skill-category {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent3);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
-
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.3s, transform 0.2s; }
+  .skill-card:hover { border-color: rgba(79,142,247,0.3); transform: translateY(-3px); }
+  .skill-category { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; }
   .skill-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-chip { font-size: 0.82rem; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 4px; transition: all 0.2s; cursor: default; }
+  .skill-chip:hover { color: var(--accent); border-color: var(--accent); background: rgba(79,142,247,0.06); }
 
-  .skill-chip {
-    font-size: 0.82rem;
-    color: #b0b0c8;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    padding: 0.3rem 0.75rem;
-    border-radius: 4px;
-    transition: all 0.2s;
-    cursor: default;
-  }
-
-  .skill-chip:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: rgba(79,142,247,0.06);
-  }
-
-  .edu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .edu-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .edu-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
   .edu-card:hover { border-color: rgba(124,58,237,0.4); }
-
-  .edu-year {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 3rem;
-    color: var(--border);
-    position: absolute;
-    top: 1rem; right: 1.5rem;
-    line-height: 1;
-    user-select: none;
-  }
-
-  .edu-degree {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .edu-school {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--accent2);
-  }
+  .edu-year { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem; color: var(--border); position: absolute; top: 1rem; right: 1.5rem; line-height: 1; user-select: none; }
+  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+  .edu-school { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent2); }
 
   .lang-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .lang-card { flex: 1; min-width: 160px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 1.4rem; text-align: center; transition: all 0.2s; }
+  .lang-card:hover { border-color: var(--accent3); transform: translateY(-3px); }
+  .lang-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
+  .lang-level { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent3); letter-spacing: 0.1em; margin-bottom: 0.9rem; display: block; }
+  .lang-bar-track { width: 100%; height: 4px; background: var(--border); border-radius: 100px; overflow: hidden; }
+  .lang-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent3), var(--accent)); width: 0%; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  .lang-card {
-    flex: 1;
-    min-width: 150px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem 1.2rem;
-    text-align: center;
-    transition: all 0.2s;
-  }
-
-  .lang-card:hover {
-    border-color: var(--accent3);
-    transform: translateY(-3px);
-  }
-
-  .lang-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .lang-level {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent3);
-    letter-spacing: 0.1em;
-  }
+  .cert-grid { display: grid; gap: 1.5rem; }
+  .cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.8rem 2rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.2s; }
+  .cert-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent3), var(--accent)); border-radius: 4px 0 0 4px; }
+  .cert-card:hover { border-color: rgba(6,214,160,0.35); transform: translateX(4px); }
+  .cert-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.02rem; color: var(--text); margin-bottom: 0.5rem; line-height: 1.4; }
+  .cert-org { font-family: 'DM Mono', monospace; font-size: 0.76rem; color: var(--accent3); letter-spacing: 0.08em; text-transform: uppercase; }
 
   #contact { text-align: center; }
+  .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4rem 3rem; position: relative; overflow: hidden; }
+  .contact-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(79,142,247,0.08) 0%, transparent 70%); pointer-events: none; }
+  .contact-desc { color: var(--muted); font-size: 1rem; max-width: 480px; margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 0.82rem; transition: all 0.2s; }
+  .contact-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79,142,247,0.15); }
 
-  .contact-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 4rem 3rem;
-    position: relative;
-    overflow: hidden;
-  }
+  .back-to-top { position: fixed; bottom: 2rem; right: 2rem; z-index: 99; width: 44px; height: 44px; background: var(--accent); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; font-weight: 700; box-shadow: 0 4px 20px rgba(79,142,247,0.4); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s, background 0.2s; pointer-events: none; }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+  .back-to-top:hover { background: var(--accent2); transform: translateY(-2px); }
 
-  .contact-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(79,142,247,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
+  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
 
-  .contact-desc {
-    color: var(--muted);
-    font-size: 1rem;
-    max-width: 480px;
-    margin: 0 auto 2.5rem;
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
 
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    text-decoration: none;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.82rem;
-    transition: all 0.2s;
-  }
-
-  .contact-item:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(79,142,247,0.15);
-  }
-
-  .cert-grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .cert-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.8rem 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.2s;
-  }
-
-  .cert-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, var(--accent3), var(--accent));
-    border-radius: 4px 0 0 4px;
-  }
-
-  .cert-card:hover {
-    border-color: rgba(6,214,160,0.35);
-    transform: translateX(4px);
-  }
-
-  .cert-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.02rem;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-  }
-
-  .cert-org {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.76rem;
-    color: var(--accent3);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid var(--border);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%       { transform: translateX(-50%) translateY(8px); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     section { padding: 5rem 1.5rem; }
     .exp-header { flex-direction: column; }
+    .stats-band { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-item:last-child { border-bottom: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">AEA.</div>
-  <ul class="nav-links">
-    <li><a onclick="scrollToSection('experience')">Expérience</a></li>
-    <li><a onclick="scrollToSection('skills')">Compétences</a></li>
-    <li><a onclick="scrollToSection('education')">Formation</a></li>
-    <li><a onclick="scrollToSection('certifications')">Certifications</a></li>
-    <li><a onclick="scrollToSection('contact')">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a onclick="scrollToSection('experience')">Expérience</a></li>
+      <li><a onclick="scrollToSection('skills')">Compétences</a></li>
+      <li><a onclick="scrollToSection('education')">Formation</a></li>
+      <li><a onclick="scrollToSection('certifications')">Certifications</a></li>
+      <li><a onclick="scrollToSection('contact')">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Clair</button>
+  </div>
 </nav>
 
-<!-- HERO -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <section id="hero">
   <div class="hero-tag">// Disponible immédiatement dans toute la France · Mantes-La-Ville (78)</div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Ouvert aux opportunités — CDI &amp; Missions Freelance
+  </div>
   <h1 class="hero-name">Abdallah<br><span>EL ABIAD</span></h1>
-  <p class="hero-subtitle">Ingénieur IT · Full Stack · Data & IA · Consultant Digital</p>
+  <p class="hero-subtitle"><span class="typing-text" id="typingText"></span><span class="typing-cursor"></span></p>
   <p class="hero-desc">
-    Master 2 MIAGE avec une double compétence <strong style="color: var(--text); font-weight: 500;">développement logiciel</strong> et <strong style="color: var(--text); font-weight: 500;">Data / IA</strong>. Autonome, rigoureux, à l'aise dans des rôles techniques comme dans des rôles de conseil.
+    Master 2 MIAGE avec une double compétence <strong style="color:var(--text);font-weight:500;">développement logiciel</strong> et <strong style="color:var(--text);font-weight:500;">Data / IA</strong>. Autonome, rigoureux, à l'aise dans des rôles techniques comme dans des rôles de conseil.
   </p>
+  <div class="stats-band">
+    <div class="stat-item"><div class="stat-num" data-target="30" data-suffix="%">0%</div><div class="stat-label">réduction temps<br>de traitement</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="95" data-suffix="%">0%</div><div class="stat-label">détection<br>greenwashing NLP</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="3000" data-suffix="+">0+</div><div class="stat-label">lignes de données<br>analysées</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="40" data-suffix="%">0%</div><div class="stat-label">réduction temps<br>de réponse BDD</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="3" data-suffix="">0</div><div class="stat-label">mises en production<br>réussies</div></div>
+  </div>
   <div class="hero-ctas">
     <a onclick="scrollToSection('experience')" class="btn btn-primary">Voir mes expériences →</a>
     <a onclick="scrollToSection('contact')" class="btn btn-outline">Me contacter</a>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    scroll
-  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-label reveal">01 · Parcours</div>
   <h2 class="section-title reveal">Expériences<br>Professionnelles</h2>
   <div class="divider reveal"></div>
   <div class="exp-grid">
-
     <div class="exp-card reveal">
       <div class="exp-header">
         <div class="exp-company">ALTEN FRANCE</div>
         <span class="exp-period">2025 · 6 mois · PFE</span>
       </div>
-      <div class="exp-role">Consultant Data & Développeur Full Stack</div>
+      <div class="exp-role">Consultant Data &amp; Développeur Full Stack</div>
       <ul class="exp-bullets">
         <li>Développement d'un outil complet de <strong>détection du greenwashing</strong> (Python, Streamlit) analysant +3 000 lignes de données.</li>
         <li>Conception d'un <strong>système de scoring NLP</strong> sur des communiqués RSE/ESG, identifiant 95 % des patterns de greenwashing récurrents.</li>
@@ -656,17 +250,15 @@
       </ul>
       <div class="stack-tags">
         <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Streamlit</span>
-        <span class="tag">SQL</span><span class="tag">NLP</span><span class="tag">Visualisation</span>
-        <span class="tag">Gestion de projet</span>
+        <span class="tag">SQL</span><span class="tag">NLP</span><span class="tag">Visualisation</span><span class="tag">Gestion de projet</span>
       </div>
     </div>
-
     <div class="exp-card reveal">
       <div class="exp-header">
         <div class="exp-company">ALTEN MAROC</div>
         <span class="exp-period">2023 – 2024 · CDI</span>
       </div>
-      <div class="exp-role">Consultant Technico-Fonctionnel & Ingénieur Logiciel</div>
+      <div class="exp-role">Consultant Technico-Fonctionnel &amp; Ingénieur Logiciel</div>
       <ul class="exp-bullets">
         <li>Développement <strong>backend Python/Django</strong> et conception d'APIs RESTful robustes.</li>
         <li>Optimisation des bases de données relationnelles → réduction des temps de réponse de <strong>20 à 40 %</strong> selon les endpoints.</li>
@@ -678,168 +270,75 @@
         <span class="tag">Git</span><span class="tag">JavaScript</span><span class="tag">Agile</span>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="section-label reveal">02 · Arsenal</div>
   <h2 class="section-title reveal">Compétences<br>Techniques</h2>
   <div class="divider reveal"></div>
   <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="skill-category">Langages</div>
-      <div class="skill-items">
-        <span class="skill-chip">Python ★★★</span><span class="skill-chip">SQL ★★★</span>
-        <span class="skill-chip">JavaScript</span><span class="skill-chip">HTML/CSS</span>
-        <span class="skill-chip">Bash</span><span class="skill-chip">PowerShell</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-category">Backend & API</div>
-      <div class="skill-items">
-        <span class="skill-chip">Django</span><span class="skill-chip">REST APIs</span>
-        <span class="skill-chip">.NET Core</span><span class="skill-chip">Tests unitaires</span>
-        <span class="skill-chip">Optimisation BDD</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-category">Frontend</div>
-      <div class="skill-items">
-        <span class="skill-chip">Angular</span><span class="skill-chip">Streamlit</span>
-        <span class="skill-chip">Plotly</span><span class="skill-chip">Matplotlib</span>
-        <span class="skill-chip">Seaborn</span><span class="skill-chip">HTML/CSS</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-category">Data & IA</div>
-      <div class="skill-items">
-        <span class="skill-chip">Pandas</span><span class="skill-chip">Scikit-learn</span>
-        <span class="skill-chip">NLP</span><span class="skill-chip">Text Mining</span>
-        <span class="skill-chip">Power BI</span><span class="skill-chip">ETL</span>
-        <span class="skill-chip">Excel/VBA</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-category">DevOps & Outils</div>
-      <div class="skill-items">
-        <span class="skill-chip">Git</span><span class="skill-chip">Docker</span>
-        <span class="skill-chip">GitHub Actions</span><span class="skill-chip">GitLab CI</span>
-        <span class="skill-chip">Jira</span><span class="skill-chip">Postman</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-category">Méthodes</div>
-      <div class="skill-items">
-        <span class="skill-chip">Agile / Scrum</span><span class="skill-chip">Analyse fonctionnelle</span>
-        <span class="skill-chip">MOA</span><span class="skill-chip">Tests unitaires</span>
-        <span class="skill-chip">Documentation</span>
-      </div>
-    </div>
+    <div class="skill-card reveal"><div class="skill-category">Langages</div><div class="skill-items"><span class="skill-chip">Python ★★★</span><span class="skill-chip">SQL ★★★</span><span class="skill-chip">JavaScript</span><span class="skill-chip">HTML/CSS</span><span class="skill-chip">Bash</span><span class="skill-chip">PowerShell</span></div></div>
+    <div class="skill-card reveal"><div class="skill-category">Backend &amp; API</div><div class="skill-items"><span class="skill-chip">Django</span><span class="skill-chip">REST APIs</span><span class="skill-chip">.NET Core</span><span class="skill-chip">Tests unitaires</span><span class="skill-chip">Optimisation BDD</span></div></div>
+    <div class="skill-card reveal"><div class="skill-category">Frontend</div><div class="skill-items"><span class="skill-chip">Angular</span><span class="skill-chip">Streamlit</span><span class="skill-chip">Plotly</span><span class="skill-chip">Matplotlib</span><span class="skill-chip">Seaborn</span><span class="skill-chip">HTML/CSS</span></div></div>
+    <div class="skill-card reveal"><div class="skill-category">Data &amp; IA</div><div class="skill-items"><span class="skill-chip">Pandas</span><span class="skill-chip">Scikit-learn</span><span class="skill-chip">NLP</span><span class="skill-chip">Text Mining</span><span class="skill-chip">Power BI</span><span class="skill-chip">ETL</span><span class="skill-chip">Excel/VBA</span></div></div>
+    <div class="skill-card reveal"><div class="skill-category">RPA &amp; Automatisation</div><div class="skill-items"><span class="skill-chip">UiPath Studio</span><span class="skill-chip">UiPath Orchestrator</span><span class="skill-chip">Automatisation emails</span><span class="skill-chip">Automatisation fichiers</span></div></div>
+    <div class="skill-card reveal"><div class="skill-category">DevOps &amp; Outils</div><div class="skill-items"><span class="skill-chip">Git</span><span class="skill-chip">Docker</span><span class="skill-chip">GitHub Actions</span><span class="skill-chip">GitLab CI</span><span class="skill-chip">Jira</span><span class="skill-chip">Postman</span></div></div>
+    <div class="skill-card reveal"><div class="skill-category">Méthodes</div><div class="skill-items"><span class="skill-chip">Agile / Scrum</span><span class="skill-chip">Analyse fonctionnelle</span><span class="skill-chip">MOA</span><span class="skill-chip">Tests unitaires</span><span class="skill-chip">Documentation</span></div></div>
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
   <div class="section-label reveal">03 · Formation</div>
   <h2 class="section-title reveal">Parcours<br>Académique</h2>
   <div class="divider reveal"></div>
   <div class="edu-grid">
-    <div class="edu-card reveal">
-      <div class="edu-year">25</div>
-      <div class="edu-degree">Master 2 MIAGE<br>Sciences du Numérique & Management</div>
-      <div class="edu-school">Université de Bordeaux</div>
-    </div>
-    <div class="edu-card reveal">
-      <div class="edu-year">23</div>
-      <div class="edu-degree">Ingénieur d'État en Informatique</div>
-      <div class="edu-school">École des Sciences de l'Ingénieur</div>
-    </div>
+    <div class="edu-card reveal"><div class="edu-year">25</div><div class="edu-degree">Master 2 MIAGE<br>Sciences du Numérique &amp; Management</div><div class="edu-school">Université de Bordeaux</div></div>
+    <div class="edu-card reveal"><div class="edu-year">23</div><div class="edu-degree">Ingénieur d'État en Informatique</div><div class="edu-school">École des Sciences de l'Ingénieur</div></div>
   </div>
 </section>
 
-<!-- LANGUAGES -->
-<section id="languages" style="padding-top: 0;">
+<section id="languages" style="padding-top:0;">
   <div class="section-label reveal">04 · Langues</div>
   <h2 class="section-title reveal">Maîtrise<br>Linguistique</h2>
   <div class="divider reveal"></div>
   <div class="lang-grid">
-    <div class="lang-card reveal">
-      <div class="lang-name">Français</div>
-      <div class="lang-level">C2 · Courant</div>
-    </div>
-    <div class="lang-card reveal">
-      <div class="lang-name">Anglais</div>
-      <div class="lang-level">C1 · Courant</div>
-    </div>
-    <div class="lang-card reveal">
-      <div class="lang-name">Espagnol</div>
-      <div class="lang-level">B2 · Avancé</div>
-    </div>
-    <div class="lang-card reveal">
-      <div class="lang-name">Arabe</div>
-      <div class="lang-level">C2 · Courant</div>
-    </div>
+    <div class="lang-card reveal"><div class="lang-name">Français</div><span class="lang-level">C2 · Courant</span><div class="lang-bar-track"><div class="lang-bar-fill" data-width="100"></div></div></div>
+    <div class="lang-card reveal"><div class="lang-name">Anglais</div><span class="lang-level">C1 · Courant</span><div class="lang-bar-track"><div class="lang-bar-fill" data-width="85"></div></div></div>
+    <div class="lang-card reveal"><div class="lang-name">Espagnol</div><span class="lang-level">B2 · Avancé</span><div class="lang-bar-track"><div class="lang-bar-fill" data-width="70"></div></div></div>
+    <div class="lang-card reveal"><div class="lang-name">Arabe</div><span class="lang-level">C2 · Courant</span><div class="lang-bar-track"><div class="lang-bar-fill" data-width="100"></div></div></div>
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
+<section id="certifications" style="padding-top:0;">
   <div class="section-label reveal">05 · Certifications</div>
-  <h2 class="section-title reveal">Certifications<br>Professionnelles</h2>
+  <h2 class="section-title reveal">Certifications<br>&amp; Formation</h2>
   <div class="divider reveal"></div>
-
   <div class="cert-grid">
-    <div class="cert-card reveal">
-      <div class="cert-title">Honoris 21st Century Skills Certificate</div>
-      <div class="cert-org">Personal, Social, Digital & Entrepreneurial Skills</div>
-    </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-title">UiPath – Orchestrator: Scaling & Scheduling Your Testing Workforce</div>
-      <div class="cert-org">UiPath</div>
-    </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-title">UiPath Studio (v2020.4) – Automatisation des fichiers et dossiers</div>
-      <div class="cert-org">UiPath Studio</div>
-    </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-title">UiPath Studio – Automatisation des e-mails</div>
-      <div class="cert-org">UiPath Studio</div>
-    </div>
+    <div class="cert-card reveal"><div class="cert-title">Honoris 21st Century Skills Certificate</div><div class="cert-org">Personal, Social, Digital &amp; Entrepreneurial Skills · Honoris</div></div>
+    <div class="cert-card reveal"><div class="cert-title">UiPath Orchestrator — Scaling &amp; Scheduling Your Testing Workforce</div><div class="cert-org">UiPath Academy</div></div>
+    <div class="cert-card reveal"><div class="cert-title">UiPath Studio (v2020.4) — Automatisation des fichiers et dossiers</div><div class="cert-org">UiPath Academy</div></div>
+    <div class="cert-card reveal"><div class="cert-title">UiPath Studio — Automatisation des e-mails</div><div class="cert-org">UiPath Academy</div></div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="section-label reveal">06 · Contact</div>
   <h2 class="section-title reveal">Travaillons<br>Ensemble</h2>
   <div class="divider reveal"></div>
   <div class="contact-card reveal">
-    <p class="contact-desc">Disponible pour des missions freelance, des CDI ou des collaborations en Data, IA & Full Stack. N'hésitez pas à me contacter.</p>
+    <p class="contact-desc">Disponible pour des missions freelance, des CDI ou des collaborations en Data, IA &amp; Full Stack. N'hésitez pas à me contacter.</p>
     <div class="contact-links">
       <a href="mailto:elabiadabdallah@gmail.com" class="contact-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         elabiadabdallah@gmail.com
       </a>
       <a href="tel:0670361118" class="contact-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
         06 70 36 11 18
       </a>
       <a href="https://www.linkedin.com/in/abdallah-el-abiad-67849674856465975t/" target="_blank" class="contact-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-          <rect x="2" y="9" width="4" height="12"/>
-          <circle cx="4" cy="4" r="2"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         LinkedIn
       </a>
     </div>
@@ -847,10 +346,22 @@
 </section>
 
 <footer>
-  <p>© 2025 Abdallah EL ABIAD · Conçu & développé avec soin · Mantes-La-Ville, France</p>
+  <p>© 2025 Abdallah EL ABIAD · Conçu &amp; développé avec soin · Mantes-La-Ville, France</p>
 </footer>
 
 <script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if (html.getAttribute('data-theme') === 'dark') {
+      html.setAttribute('data-theme', 'light');
+      btn.textContent = '🌙 Sombre';
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      btn.textContent = '☀️ Clair';
+    }
+  }
+
   function scrollToSection(id) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -858,6 +369,11 @@
     const top = el.getBoundingClientRect().top + window.scrollY - navH - 20;
     window.scrollTo({ top, behavior: 'smooth' });
   }
+
+  const backBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backBtn.classList.toggle('visible', window.scrollY > 400);
+  });
 
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -874,6 +390,55 @@
     chip.addEventListener('mouseenter', () => { chip.style.boxShadow = '0 0 12px rgba(79,142,247,0.2)'; });
     chip.addEventListener('mouseleave', () => { chip.style.boxShadow = ''; });
   });
+
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.lang-bar-fill').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.lang-card').forEach(card => barObserver.observe(card));
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const steps = 60;
+    const stepTime = 1800 / steps;
+    let current = 0;
+    const increment = target / steps;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = (target >= 1000)
+        ? Math.floor(current).toLocaleString('fr-FR') + suffix
+        : Math.floor(current) + suffix;
+    }, stepTime);
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.stat-num').forEach(el => animateCounter(el));
+    }, 1000);
+  });
+
+  // Typing — s'écrit une seule fois, ne s'efface pas
+  const fullTitle = 'Ingénieur IT\u2002|\u2002Développeur Full Stack\u2002|\u2002Data & IA\u2002|\u2002Consultant Digital';
+  let charIdx = 0;
+  const typingEl = document.getElementById('typingText');
+
+  function type() {
+    if (charIdx <= fullTitle.length) {
+      typingEl.textContent = fullTitle.substring(0, charIdx);
+      charIdx++;
+      setTimeout(type, 50);
+    }
+  }
+
+  setTimeout(type, 1200);
 </script>
 </body>
 </html>
